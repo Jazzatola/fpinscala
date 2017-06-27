@@ -1,4 +1,8 @@
+# Intellij project files.
+/.idea/workspace.xml
+
+# Build products
 target/
 
-*.class
 *.log
+
