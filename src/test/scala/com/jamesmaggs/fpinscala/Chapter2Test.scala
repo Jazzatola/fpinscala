@@ -1,13 +1,18 @@
 package com.jamesmaggs.fpinscala
 
 import com.jamesmaggs.fpinscala.Chapter2._
+import org.scalacheck._
+import org.scalacheck.Prop._
 
-class Chapter2Test extends UnitTest {
 
-  test("Fibonacci sequence") {
-    val sequence = List(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765)
-    val assertion = (value: Int, index: Int) => assert(fib(index) == value)
-    sequence.zipWithIndex.foreach(assertion.tupled)
+object Chapter2Test extends Properties("Chapter 2") {
+
+  private val smallInteger = Gen.choose(0, 500)
+
+  property("fib(n) is the sum of the previous two") = forAll(smallInteger) { n =>
+    val x = fib(n)
+    val y = fib(n + 1)
+    val z = fib(n + 2)
+    x + y == z
   }
-
 }
