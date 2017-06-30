@@ -13,11 +13,13 @@ object List {
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
-
-  def tail[A](as: List[A]): List[A] = as match {
-    case Nil => Nil
-    case Cons(_, tail) => tail
-  }
+  def tail[A](as: List[A]): List[A] = drop(as, 1)
 
   def setHead[A](as: List[A], a: A): List[A] = Cons(a, as)
+
+  def drop[A](as: List[A], n: Int): List[A] = (as, n) match {
+    case (Nil, _) => Nil
+    case (l, 0) => l
+    case (Cons(_, tail), i) => drop(tail, i - 1)
+  }
 }
