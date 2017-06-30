@@ -20,12 +20,23 @@ object List {
   def drop[A](as: List[A], n: Int): List[A] = (as, n) match {
     case (Nil, _) => Nil
     case (l, 0) => l
-    case (Cons(_, tail), i) => drop(tail, i - 1)
+    case (Cons(_, t), i) => drop(t, i - 1)
   }
 
   def dropWhile[A](as: List[A], f: A => Boolean): List[A] = as match {
     case Nil => Nil
-    case Cons(head, tail) => if(f(head)) dropWhile(tail, f) else as
+    case Cons(h, t) => if(f(h)) dropWhile(t, f) else as
+  }
+
+  def append[A](as1: List[A], as2: List[A]): List[A] = as1 match {
+    case Nil => as2
+    case Cons(h,t) => Cons(h, append(t, as2))
+  }
+
+  def init[A](as: List[A]): List[A] =  as match {
+    case Nil => Nil
+    case Cons(h, Nil) => Nil
+    case Cons(h, t) => Cons(h, init(t))
   }
 
 }

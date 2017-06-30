@@ -20,5 +20,10 @@ object Chapter3Test extends Properties("Chapter 3") {
   property("dropWhile removes nothing if predicate is always false") = forAll(genList) { l =>
     dropWhile(l, predicate(false)) == l
   }
+
+  property("init and tail are the same for a single element") = forAll(smallInteger) { i =>
+    val l = List(i)
+    init(l) == tail(l)
+  }
 }
 
