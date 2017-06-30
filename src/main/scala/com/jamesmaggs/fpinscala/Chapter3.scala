@@ -22,4 +22,10 @@ object List {
     case (l, 0) => l
     case (Cons(_, tail), i) => drop(tail, i - 1)
   }
+
+  def dropWhile[A](as: List[A], f: A => Boolean): List[A] = as match {
+    case Nil => Nil
+    case Cons(head, tail) => if(f(head)) dropWhile(tail, f) else as
+  }
+
 }

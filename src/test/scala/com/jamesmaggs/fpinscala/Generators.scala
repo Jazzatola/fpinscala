@@ -1,7 +1,7 @@
 package com.jamesmaggs.fpinscala
 
-import org.scalacheck._
 import org.scalacheck.Gen._
+import org.scalacheck._
 
 object Generators {
 
