@@ -1,14 +1,14 @@
 package com.jamesmaggs.fpinscala
 
 import com.jamesmaggs.fpinscala.Chapter2._
-import org.scalacheck.Gen._
-import org.scalacheck._
+import com.jamesmaggs.fpinscala.Generators._
 import org.scalacheck.Prop._
+import org.scalacheck._
 
 
 object Chapter2Test extends Properties("Chapter 2") {
 
-  private val smallInteger = choose(0, 500)
+  private val compare = (a: Int, b:Int) => a <= b
 
   property("fib(n) is the sum of the previous two") = forAll(smallInteger) { n =>
     val x = fib(n)
@@ -16,9 +16,6 @@ object Chapter2Test extends Properties("Chapter 2") {
     val z = fib(n + 2)
     x + y == z
   }
-
-  private val compare = (a: Int, b:Int) => a <= b
-  private val unsortedArray = containerOf[Array, Int](smallInteger) suchThat(a => !a.sameElements(a.sorted))
 
   property("isSorted is false for unsorted arrays") = forAll(unsortedArray) { ns =>
     !isSorted(ns, compare)
