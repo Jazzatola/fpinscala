@@ -18,4 +18,6 @@ object List {
     case Nil => Nil
     case Cons(_, tail) => tail
   }
+
+  def setHead[A](as: List[A], a: A): List[A] = Cons(a, as)
 }
