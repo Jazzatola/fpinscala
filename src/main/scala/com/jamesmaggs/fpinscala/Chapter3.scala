@@ -55,4 +55,5 @@ object List {
 
   def increment(as: List[Int]): List[Int] = foldLeft(as, List[Int]())((acc, a) => Cons(a + 1, acc))
 
+  def doublesToStrings(as: List[Double]): List[String] = foldLeft(as, List[String]())((acc, a) => Cons(a.toString, acc))
 }

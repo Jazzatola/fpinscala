@@ -78,6 +78,5 @@ object Chapter3Test extends Properties("Chapter 3") {
   property("increment a list") = forAll(genList) { l =>
     sum(increment(l)) == sum(l) + length(l)
   }
-
 }
 
