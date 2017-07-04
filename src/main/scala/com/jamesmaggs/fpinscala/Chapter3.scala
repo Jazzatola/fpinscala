@@ -28,10 +28,7 @@ object List {
     case Cons(h, t) => if(f(h)) dropWhile(t, f) else as
   }
 
-  def append[A](as1: List[A], as2: List[A]): List[A] = as1 match {
-    case Nil => as2
-    case Cons(h,t) => Cons(h, append(t, as2))
-  }
+  def append[A](as1: List[A], as2: List[A]): List[A] = foldRight(as1, as2)((a, as2) => Cons(a, as2))
 
   def init[A](as: List[A]): List[A] =  as match {
     case Nil => Nil
