@@ -78,5 +78,15 @@ object Chapter3Test extends Properties("Chapter 3") {
   property("increment a list") = forAll(genList) { l =>
     sum(increment(l)) == sum(l) + length(l)
   }
+
+  property("filter removes something at least") = forAll(genList, arbitrary[Int => Boolean]) { (l, f) =>
+    length(l) >= length(filter(l)(f))
+  }
+
+  property("filter out some odd numbers") = {
+    val value = filter(List(1, 2, 3, 4, 5, 6, 7, 8, 9))(_ % 2 == 0)
+    value == List(2, 4, 6, 8)
+  }
+
 }
 
