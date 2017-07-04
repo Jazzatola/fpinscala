@@ -53,4 +53,6 @@ object List {
 
   def concatenate[A](ass: List[List[A]]): List[A] = foldLeft(ass, List[A]())((acc, as) => append(acc, as))
 
+  def increment(as: List[Int]): List[Int] = foldLeft(as, List[Int]())((acc, a) => Cons(a + 1, acc))
+
 }
