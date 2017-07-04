@@ -59,5 +59,13 @@ object Chapter3Test extends Properties("Chapter 3") {
     length(tail(l)) == length(l) - 1
   }
 
+  property("reverse a list twice to get back to the original") = forAll(genList) { l =>
+    reverse(reverse(l)) == l
+  }
+
+  property("reverse doesn't change the length") = forAll(genList) { l =>
+    length(reverse(l)) == length(l)
+  }
+
 }
 
