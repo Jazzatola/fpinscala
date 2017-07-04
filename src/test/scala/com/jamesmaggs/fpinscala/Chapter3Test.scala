@@ -31,6 +31,18 @@ object Chapter3Test extends Properties("Chapter 3") {
     init(l) == tail(l)
   }
 
+  property("sum of empty list is zero") = {
+    sum(Nil) == 0
+  }
+
+  property("sum of a list") = forAll(smallInteger, genList) { (i, l) =>
+    sum(setHead(l, i)) == sum(l) + i
+  }
+
+  property("product of empty list is one") = {
+    product(Nil) == 1.0
+  }
+
   property("length of empty list is zero") = {
     length(Nil) == 0
   }
