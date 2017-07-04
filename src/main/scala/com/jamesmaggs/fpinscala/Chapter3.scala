@@ -53,7 +53,9 @@ object List {
 
   def concatenate[A](ass: List[List[A]]): List[A] = foldLeft(ass, List[A]())((acc, as) => append(acc, as))
 
-  def increment(as: List[Int]): List[Int] = foldLeft(as, List[Int]())((acc, a) => Cons(a + 1, acc))
+  def increment(as: List[Int]): List[Int] = map(as)(_ + 1)
 
-  def doublesToStrings(as: List[Double]): List[String] = foldLeft(as, List[String]())((acc, a) => Cons(a.toString, acc))
+  def doublesToStrings(as: List[Double]): List[String] = map(as)(_.toString)
+
+  def map[A,B](as: List[A])(f: A => B): List[B] = foldLeft(as, List[B]())((acc, a) => Cons(f(a), acc))
 }
