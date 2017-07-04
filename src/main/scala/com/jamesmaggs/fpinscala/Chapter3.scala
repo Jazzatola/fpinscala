@@ -51,4 +51,6 @@ object List {
 
   def reverse[A](as: List[A]): List[A] = foldLeft(as, List[A]())((acc, a) => Cons(a, acc))
 
+  def concatenate[A](ass: List[List[A]]): List[A] = foldLeft(ass, List[A]())((acc, as) => append(acc, as))
+
 }

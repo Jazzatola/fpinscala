@@ -67,5 +67,12 @@ object Chapter3Test extends Properties("Chapter 3") {
     length(reverse(l)) == length(l)
   }
 
+  property("concatenate some lists") = forAll(genList, genList, genList) { (l1, l2, l3) =>
+    concatenate(List(l1, l2, l3)) == append(l1, append(l2, l3))
+  }
+
+  property("length of concatenated lists is the sum of all lengths") = forAll(genList, genList, genList) { (l1, l2, l3) =>
+    length(concatenate(List(l1, l2, l3))) == length(l1) + length(l2) + length(l3)
+  }
 }
 
