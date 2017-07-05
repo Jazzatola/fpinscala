@@ -84,8 +84,26 @@ object Chapter3Test extends Properties("Chapter 3") {
   }
 
   property("filter out some odd numbers") = {
-    val value = filter(List(1, 2, 3, 4, 5, 6, 7, 8, 9))(_ % 2 == 0)
-    value == List(2, 4, 6, 8)
+    filter(List(1, 2, 3, 4, 5, 6, 7, 8, 9))(_ % 2 == 0) == List(2, 4, 6, 8)
+  }
+
+  property("flatMap example") = {
+    flatMap(List(1,2,3))(i => List(i,i)) == List(1,1,2,2,3,3)
+  }
+
+  property("flatMap - left identity") = forAll(smallInteger) { i =>
+    val f = (i: Int) => List(i ^ 2)
+    flatMap(List(i))(f) == f(i)
+  }
+
+  property("flatMap - right identity") = forAll(genList) { l =>
+    flatMap(l)(List(_)) == l
+  }
+
+  property("flatMap - associativity") = forAll(genList) { l =>
+    val f = (i: Int) => List(i ^ 2)
+    val g = (i: Int) => List(i + 3)
+    flatMap(flatMap(l)(f))(g) == flatMap(l)(i => flatMap(f(i))(g))
   }
 
 }
