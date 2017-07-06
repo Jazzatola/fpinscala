@@ -68,9 +68,11 @@ object List {
 
   def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = foldRight(as, List[B]())((a, acc) => append(f(a), acc))
 
-  def add(l1: List[Int], l2: List[Int]): List[Int] = (l1, l2) match {
+  def add(l1: List[Int], l2: List[Int]): List[Int] = zipWith(l1, l2)(_ + _)
+
+  def zipWith[A, B, C](as: List[A], bs: List[B])(f: (A,B) => C): List[C] = (as, bs) match {
     case (Nil, _) => Nil
     case (_, Nil) => Nil
-    case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1 + h2, add(t1, t2))
+    case (Cons(h1, t1), Cons(h2, t2)) => Cons(f(h1, h2), zipWith(t1, t2)(f))
   }
 }
