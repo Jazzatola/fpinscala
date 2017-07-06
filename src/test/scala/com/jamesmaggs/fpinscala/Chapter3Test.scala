@@ -110,5 +110,9 @@ object Chapter3Test extends Properties("Chapter 3") {
     add(List(1,2,3), List(4,5,6)) == List(5,7,9)
   }
 
+  property("the init of the tail is a subsequence") = forAll(genList suchThat(_ != Nil)) { l =>
+    hasSubsequence(l, init(tail(l)))
+  }
+
 }
 
