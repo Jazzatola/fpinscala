@@ -106,5 +106,9 @@ object Chapter3Test extends Properties("Chapter 3") {
     flatMap(flatMap(l)(f))(g) == flatMap(l)(i => flatMap(f(i))(g))
   }
 
+  property("add two lists together") = {
+    add(List(1,2,3), List(4,5,6)) == List(5,7,9)
+  }
+
 }
 
