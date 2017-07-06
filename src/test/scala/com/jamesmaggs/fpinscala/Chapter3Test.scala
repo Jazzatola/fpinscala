@@ -11,7 +11,15 @@ object Chapter3Test extends Properties("Chapter 3") {
   private def predicate(result: Boolean) = (i: Int) => result
 
   property("tail returns the elements without the head") = forAll(smallInteger, genList) { (i, l) =>
-    tail(setHead(l, i)) == l
+    tail(Cons(i, l)) == l
+  }
+
+  property("setHead maintains the same length") = forAll(smallInteger, genList) { (i, l) =>
+    length(setHead(l, i)) == length(l)
+  }
+
+  property("setHead does not alter the tail") = forAll(smallInteger, genList) { (i, l) =>
+    tail(setHead(l, i)) == tail(l)
   }
 
   property("dropWhile removes everything if predicate is always true") = forAll(genList) { l =>
@@ -36,7 +44,7 @@ object Chapter3Test extends Properties("Chapter 3") {
   }
 
   property("sum of a list") = forAll(smallInteger, genList) { (i, l) =>
-    sum(setHead(l, i)) == sum(l) + i
+    sum(Cons(i, l)) == sum(l) + i
   }
 
   property("product of empty list is one") = {

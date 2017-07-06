@@ -17,7 +17,10 @@ object List {
 
   def tail[A](as: List[A]): List[A] = drop(as, 1)
 
-  def setHead[A](as: List[A], a: A): List[A] = Cons(a, as)
+  def setHead[A](as: List[A], a: A): List[A] = as match {
+    case Nil => Nil
+    case Cons(_, t) => Cons(a, t)
+  }
 
   @tailrec
   def drop[A](as: List[A], n: Int): List[A] = (as, n) match {
