@@ -1,8 +1,8 @@
-package com.jamesmaggs.fpinscala
+package com.jamesmaggs.fpinscala.chapter2
 
 import scala.annotation.tailrec
 
-object Chapter2 {
+object GettingStarted {
 
   def fib(n: Int): Int = {
 

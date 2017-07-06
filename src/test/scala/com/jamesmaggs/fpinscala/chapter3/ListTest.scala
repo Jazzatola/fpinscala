@@ -1,14 +1,24 @@
-package com.jamesmaggs.fpinscala
+package com.jamesmaggs.fpinscala.chapter3
 
-import com.jamesmaggs.fpinscala.Generators._
-import com.jamesmaggs.fpinscala.List._
+import com.jamesmaggs.fpinscala.chapter3.List._
 import org.scalacheck.Arbitrary._
+import org.scalacheck.Gen._
 import org.scalacheck.Prop._
 import org.scalacheck._
 
-object Chapter3Test extends Properties("Chapter 3") {
+object ListTest extends Properties("List") {
 
   private def predicate(result: Boolean) = (i: Int) => result
+
+  private val smallInteger: Gen[Int] = choose(0, 500)
+  private val genEmpty = const(Nil)
+
+  private val genCons = for {
+    head <- smallInteger
+    tail <- genList
+  } yield Cons(head, tail)
+
+  private def genList: Gen[List[Int]] = oneOf(genEmpty, genCons)
 
   property("tail returns the elements without the head") = forAll(smallInteger, genList) { (i, l) =>
     tail(Cons(i, l)) == l

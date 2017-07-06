@@ -1,9 +1,6 @@
-package com.jamesmaggs.fpinscala
+package com.jamesmaggs.fpinscala.chapter3
 
 import scala.annotation.tailrec
-
-object Chapter3 {
-}
 
 sealed trait List[+A]
 case object Nil extends List[Nothing]
@@ -39,7 +36,7 @@ object List {
 
   def init[A](as: List[A]): List[A] =  as match {
     case Nil => Nil
-    case Cons(h, Nil) => Nil
+    case Cons(_, Nil) => Nil
     case Cons(h, t) => Cons(h, init(t))
   }
 

@@ -1,14 +1,16 @@
-package com.jamesmaggs.fpinscala
+package com.jamesmaggs.fpinscala.chapter2
 
-import com.jamesmaggs.fpinscala.Chapter2._
-import com.jamesmaggs.fpinscala.Generators._
+import com.jamesmaggs.fpinscala.chapter2.GettingStarted._
+import org.scalacheck.Gen._
 import org.scalacheck.Prop._
 import org.scalacheck._
 
 
-object Chapter2Test extends Properties("Chapter 2") {
+object GettingStartedTest extends Properties("Getting Started") {
 
   private val compare = (a: Int, b:Int) => a <= b
+  private val smallInteger: Gen[Int] = choose(0, 500)
+  private val unsortedArray: Gen[Array[Int]] = containerOf[Array, Int](smallInteger) suchThat(a => !a.sameElements(a.sorted))
 
   property("fib(n) is the sum of the previous two") = forAll(smallInteger) { n =>
     val x = fib(n)
